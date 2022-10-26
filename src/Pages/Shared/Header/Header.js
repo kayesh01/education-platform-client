@@ -3,13 +3,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 
 const Header = () => {
     return (
         <div>
             <Navbar bg="light" expand="lg">
                 <Container className='d-flex justify-content-between'>
-                    <Link className='nav-link' to="/">Educationn learning</Link>
+                    <Link className='nav-link me-5' to="/">Educationn learning</Link>
+                    <Form.Check
+                        type="switch"
+                        id="custom-switch"
+                        label="dark"
+                    />
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
