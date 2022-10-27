@@ -9,6 +9,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { Image } from 'react-bootstrap';
 import { FaUserAlt } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
+import logo from '../../../asset/logo.jpg'
 
 
 const Header = () => {
@@ -24,7 +25,8 @@ const Header = () => {
         <div>
             <Navbar bg="light" expand="lg">
                 <Container className='d-flex justify-content-between'>
-                    <Link className='nav-link me-5' to="/">Educationn learning</Link>
+                    <Image style={{ height: "40px" }} roundedCircle src={logo}></Image>
+                    <Link className='nav-link me-5 ms-3' to="/">Educationn learning</Link>
                     <Form.Check
                         type="switch"
                         id="custom-switch"
@@ -37,15 +39,15 @@ const Header = () => {
                             <Link className='nav-link' to="/courses">Courses</Link>
                             <Link className='nav-link' to="/faq">FAQ</Link>
                             <Link className='nav-link' to="/blog">BLOG</Link>
-                            <Link className='nav-link'>{user?.displayName}</Link>
-                            <Link className='nav-link'>{user?.photoURL2 ?
-                                <Image style={{ height: "40px" }} roundedCircle src={user?.photoURL}></Image> :
+                            {/* <Link className='nav-link'>{user?.displayName}</Link> */}
+                            <Link className='nav-link'>{user?.photoURL ?
+                                <Image title={user?.displayName} style={{ height: "30px" }} roundedCircle src={user?.photoURL}></Image> :
                                 <FaUserAlt></FaUserAlt>
                             }</Link>
                             {
                                 user?.uid ?
                                     <>
-                                        <span>{user?.displayName}</span>
+                                        {/* <span>{user?.displayName}</span> */}
                                         <Button variant="light" onClick={handleLogOut}>Logout</Button>
                                     </>
                                     :

@@ -1,11 +1,15 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useLoaderData } from 'react-router-dom';
 
 const CheckOut = () => {
+    const course = useLoaderData();
+    console.log(course);
     return (
         <div>
-            <h2>Please Fill Up the bellow Form to Purchase the Course.</h2>
+
+            <h2>Please Fill Up the bellow Form to Purchase the <span className='badge bg-primary'>{course.name}</span>.</h2>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Your name</Form.Label>

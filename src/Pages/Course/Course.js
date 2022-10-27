@@ -16,7 +16,7 @@ const Course = () => {
                 </Card.Text>
                 <p><span className='fw-bold'>Course Price</span> ${course.amount}</p>
                 <Link className='me-5 btn btn-warning' to='/courses'>Go to courses</Link>
-                <Link to='/checkout' className='mt-auto btn btn-primary'>Get premium access</Link>
+                <Link to={`/checkout/${course.id}`} className='mt-auto btn btn-primary'>Get premium access</Link>
             </Card.Body>
         </Card>
     );
