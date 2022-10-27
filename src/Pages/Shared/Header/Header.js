@@ -4,8 +4,22 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { Image } from 'react-bootstrap';
+import { FaUserAlt } from 'react-icons/fa';
+import Button from 'react-bootstrap/Button';
+
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch((error) => console.error(error))
+    }
+
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -23,8 +37,23 @@ const Header = () => {
                             <Link className='nav-link' to="/courses">Courses</Link>
                             <Link className='nav-link' to="/faq">FAQ</Link>
                             <Link className='nav-link' to="/blog">BLOG</Link>
-                            <Link className='nav-link' to="/logIn">LOG IN</Link>
-                            <Link className='nav-link' to="/register">Register</Link>
+                            <Link className='nav-link'>{user?.displayName}</Link>
+                            <Link className='nav-link'>{user?.photoURL2 ?
+                                <Image style={{ height: "40px" }} roundedCircle src={user?.photoURL}></Image> :
+                                <FaUserAlt></FaUserAlt>
+                            }</Link>
+                            {
+                                user?.uid ?
+                                    <>
+                                        <span>{user?.displayName}</span>
+                                        <Button variant="light" onClick={handleLogOut}>Logout</Button>
+                                    </>
+                                    :
+                                    <>
+                                        <Link className='nav-link' to="/logIn">LOG IN</Link>
+                                        <Link className='nav-link' to="/register">Register</Link>
+                                    </>
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
