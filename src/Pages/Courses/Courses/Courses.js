@@ -14,7 +14,7 @@ const Courses = () => {
                 <Col md="3">
                     <ListGroup className='mt-2'>
                         {
-                            courses.map(course => <ListGroup.Item>{course.name}</ListGroup.Item>)
+                            courses.map(course => <Link to={`/course/${course.id}`} className='mt-auto btn btn-dark mb-3' variant="light">{course.name}</Link>)
                         }
                     </ListGroup></Col>
                 <Col md="9">
