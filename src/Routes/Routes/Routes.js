@@ -4,6 +4,7 @@ import Blog from "../../Pages/Blog/Blog";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
 import Course from "../../Pages/Course/Course";
 import Courses from "../../Pages/Courses/Courses/Courses";
+import Error from "../../Pages/Errro/Error";
 import Faq from "../../Pages/Faq/Faq";
 import Home from "../../Pages/Home/Home/Home";
 import LogIn from "../../Pages/LogIn/LogIn";
@@ -49,6 +50,10 @@ export const routes = createBrowserRouter([
                 path: '/checkout/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`)
+            },
+            {
+                path: '*',
+                element: <Error></Error>
             }
         ]
     }
