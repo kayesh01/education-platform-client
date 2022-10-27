@@ -1,32 +1,41 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 
 const LogIn = () => {
+    const [error, setError] = useState('');
     const { providerLogin, signIn } = useContext(AuthContext)
 
     const googleProvider = new GoogleAuthProvider()
 
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
     const handleLogIn = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 form.reset();
-                navigate('/')
+                setError('');
+                navigate(from, { replace: true });
+
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error)
+                setError(error.message);
+            });
 
     }
 
@@ -34,7 +43,7 @@ const LogIn = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+
             })
             .catch(error => console.error(error))
     }
@@ -54,9 +63,13 @@ const LogIn = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control name='password' type="password" placeholder="Password" required />
             </Form.Group>
+            <Form.Text className="text-danger">
+                {error}
+            </Form.Text>
             <Button variant="primary" type="submit">
                 LogIn
             </Button>
+            <p>Not registered ? Please registere here . <Link to='/register'>register</Link>  </p>
             <Button onClick={handleGoogleSignIn} className='mt-2' variant="primary" type="submit">
                 Log In with Google
             </Button>

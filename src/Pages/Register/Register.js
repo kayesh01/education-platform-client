@@ -1,10 +1,13 @@
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
+    const [error, setError] = useState('')
     const { createUser } = useContext(AuthContext);
 
     const handleSubmit = event => {
@@ -14,15 +17,18 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, photoURL, email, password);
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                setError('');
                 form.reset();
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+
+                console.error(error)
+                setError(error.message);
+            });
     }
 
     return (
@@ -49,6 +55,10 @@ const Register = () => {
             <Button variant="primary" type="submit">
                 Register
             </Button>
+            <Form.Text className="text-danger">
+                {error}
+            </Form.Text>
+            <p>Already registered ? than <Link to='/login'>Login</Link> </p>
         </Form >
     );
 };
