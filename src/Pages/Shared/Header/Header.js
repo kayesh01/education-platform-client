@@ -41,7 +41,7 @@ const Header = () => {
                             <Link className='nav-link' to="/blog">BLOG</Link>
                             {/* <Link className='nav-link'>{user?.displayName}</Link> */}
                             <Link className='nav-link'>{user?.photoURL ?
-                                <Image title={user?.displayName} style={{ height: "30px" }} roundedCircle src={user?.photoURL}></Image> :
+                                <Image title={user?.displayName} style={{ height: "3-0px" }} roundedCircle src={user?.photoURL}></Image> :
                                 <FaUserAlt></FaUserAlt>
                             }</Link>
                             {
